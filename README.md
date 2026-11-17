@@ -8,6 +8,20 @@ A true-black theme for Visual Studio Code, built for OLED screens and long sessi
 The pixels around your code stay off, and the code itself is in soft, warm colors
 that don't glare.
 
+![Umbra OLED: scripts/validate.mjs in the editor, with the explorer and an integrated terminal running the validator](screenshots/editor.png)
+
+## Screenshots
+
+These screenshots show this repository open in Umbra OLED.
+
+**Source Control and diff view.** The changes for this release, before they were committed:
+
+![Umbra OLED: the diff editor showing added lines in README.md](screenshots/diff.png)
+
+**Theme picker.** **Preferences: Color Theme** opened over the CI workflow:
+
+![Umbra OLED: the color theme picker opened over .github/workflows/ci.yml](screenshots/picker.png)
+
 ## Design rules
 
 Each rule below is a hard limit, and [CI](#validation) fails the build if the theme breaks one.
@@ -42,7 +56,15 @@ Each rule below is a hard limit, and [CI](#validation) fails the build if the th
 
 ## Install
 
-Build the `.vsix` and install it:
+Download the `.vsix` from the
+[latest release](https://github.com/ideaconnect/vscode-umbra-oled/releases/latest)
+and install it:
+
+```sh
+code --install-extension umbra-oled-theme-*.vsix
+```
+
+Or build it from source:
 
 ```sh
 git clone https://github.com/ideaconnect/vscode-umbra-oled.git
