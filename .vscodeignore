@@ -1,0 +1,6 @@
+.github/**
+scripts/**
+.gitignore
+.gitattributes
+**/*.vsix
+node_modules/**

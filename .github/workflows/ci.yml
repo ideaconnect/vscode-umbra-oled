@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VSCE_VERSION: 4.1.1
+  GITLEAKS_VERSION: 8.30.1
+
+jobs:
+  validate:
+    name: Validate & package
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      # The validator checks every color key against the color registry of the
+      # latest stable VS Code, so renamed or removed keys fail the build.
+      - name: Look up latest stable VS Code
+        id: vscode
+        run: |
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/vscode.json" \
+            "https://update.code.visualstudio.com/api/update/linux-x64/stable/latest"
+          {
+            echo "version=$(jq -er .productVersion "$RUNNER_TEMP/vscode.json")"
+            echo "url=$(jq -er .url "$RUNNER_TEMP/vscode.json")"
+            echo "sha256=$(jq -er .sha256hash "$RUNNER_TEMP/vscode.json")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Cache VS Code color registry
+        id: cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/vscode
+          key: vscode-colors-${{ steps.vscode.outputs.version }}
+
+      - name: Download VS Code ${{ steps.vscode.outputs.version }}
+        if: steps.cache.outputs.cache-hit != 'true'
+        env:
+          URL: ${{ steps.vscode.outputs.url }}
+          SHA256: ${{ steps.vscode.outputs.sha256 }}
+        run: |
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/vscode.tar.gz" "$URL"
+          echo "$SHA256  $RUNNER_TEMP/vscode.tar.gz" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/vscode"
+          tar -xzf "$RUNNER_TEMP/vscode.tar.gz" -C "$RUNNER_TEMP/vscode" --strip-components=1 --wildcards \
+            'VSCode-linux-x64/resources/app/package.json' \
+            'VSCode-linux-x64/resources/app/out/vs/workbench/workbench.desktop.main.js' \
+            'VSCode-linux-x64/resources/app/extensions/*/package.json'
+          rm "$RUNNER_TEMP/vscode.tar.gz"
+
+      - name: Validate theme
+        run: node scripts/validate.mjs --vscode-app "$RUNNER_TEMP/vscode/resources/app"
+
+      - name: Package VSIX
+        run: npx --yes "@vscode/vsce@${VSCE_VERSION}" package
+
+      - name: Upload VSIX
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: umbra-oled-vsix
+          path: '*.vsix'
+          if-no-files-found: error
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install gitleaks ${{ env.GITLEAKS_VERSION }}
+        working-directory: ${{ runner.temp }}
+        run: |
+          base="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSLO --retry 3 "$base/$tarball"
+          curl -fsSLO --retry 3 "$base/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          grep " ${tarball}\$" "gitleaks_${GITLEAKS_VERSION}_checksums.txt" | sha256sum -c -
+          tar -xzf "$tarball" gitleaks
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: Scan git history
+        run: gitleaks git --redact --verbose --no-banner .

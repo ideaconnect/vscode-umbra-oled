@@ -1,0 +1,51 @@
+{
+  "name": "umbra-oled-theme",
+  "displayName": "Umbra OLED",
+  "description": "True-black OLED theme with soft, warm, low-glare syntax colors that are easy on the eyes.",
+  "version": "0.1.0",
+  "publisher": "idct",
+  "author": {
+    "name": "IDCT",
+    "url": "https://idct.tech"
+  },
+  "license": "EUPL-1.2",
+  "homepage": "https://github.com/ideaconnect/vscode-umbra-oled#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ideaconnect/vscode-umbra-oled.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ideaconnect/vscode-umbra-oled/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "oled",
+    "amoled",
+    "black",
+    "dark",
+    "theme",
+    "low contrast",
+    "warm"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "package": "npx --yes @vscode/vsce@4.1.1 package"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Umbra OLED",
+        "uiTheme": "vs-dark",
+        "path": "./themes/umbra-oled-color-theme.json"
+      }
+    ]
+  }
+}

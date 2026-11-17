@@ -1,0 +1,14 @@
+# Build output
+*.vsix
+
+# Dependencies and test installs
+node_modules/
+.vscode-test/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Local env files (never commit secrets)
+.env
+.env.*
