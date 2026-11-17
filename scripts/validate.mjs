@@ -174,6 +174,19 @@ const isPureBlack = (hex) => {
 const UI_THEMES = { vs: 'light', 'vs-dark': 'dark', 'hc-black': 'hcDark', 'hc-light': 'hcLight' };
 const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 
+// The Marketplace needs a PNG icon of at least 128x128 inside the package; it rejects SVG.
+function checkIcon(where, icon) {
+  if (typeof icon !== 'string') return error(where, '"icon" must be a path');
+  if (/\.svg$/i.test(icon)) return error(where, '"icon" cannot be an SVG (the Marketplace rejects it)');
+  const file = resolve(ROOT, icon);
+  if (!existsSync(file)) return error(where, `"icon" ${icon} does not exist`);
+  const png = readFileSync(file);
+  const isPng = png.length >= 24 && png.subarray(0, 8).toString('hex') === '89504e470d0a1a0a' && png.toString('latin1', 12, 16) === 'IHDR';
+  if (!isPng) return error(where, `"icon" ${icon} is not a PNG file`);
+  const [width, height] = [png.readUInt32BE(16), png.readUInt32BE(20)];
+  if (width < 128 || height < 128) error(where, `"icon" is ${width}x${height}, the Marketplace needs at least 128x128`);
+}
+
 function checkManifest() {
   const where = 'package.json';
   const pkg = loadJson(join(ROOT, 'package.json'));
@@ -186,6 +199,12 @@ function checkManifest() {
   if (pkg.version && !SEMVER.test(pkg.version)) error(where, `"version" ${JSON.stringify(pkg.version)} is not semver`);
   if (typeof pkg.engines?.vscode !== 'string') error(where, '"engines.vscode" is required');
   if (!pkg.categories?.includes('Themes')) error(where, '"categories" must include "Themes"');
+  if (pkg.icon !== undefined) checkIcon(where, pkg.icon);
+  if (pkg.galleryBanner !== undefined) {
+    const { color, theme } = pkg.galleryBanner ?? {};
+    if (color !== undefined && !HEX.test(color)) error(where, `"galleryBanner.color" ${JSON.stringify(color)} is not a hex color`);
+    if (theme !== undefined && theme !== 'dark' && theme !== 'light') error(where, '"galleryBanner.theme" must be "dark" or "light"');
+  }
 
   // On a tag build, the tag must match the version ("0.1" matches "0.1.0", "v1.2.3" matches "1.2.3").
   if (process.env.GITHUB_REF_TYPE === 'tag' && pkg.version) {

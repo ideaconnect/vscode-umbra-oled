@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2
+
+- Published on the Visual Studio Marketplace as `IDCTpl.umbra-oled-theme`.
+- Added an extension icon and a black Marketplace banner.
+- Added the IDCT logo to the README.
+- CI publishes tagged releases to the Marketplace with Trusted Publishing,
+  after a maintainer approves the run.
+- The validator checks the icon (PNG, at least 128x128) and the banner color.
+
 ## 0.1.1
 
 - Added screenshots to the README.
