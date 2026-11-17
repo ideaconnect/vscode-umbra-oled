@@ -5,6 +5,8 @@
 [![Made in the EU](https://img.shields.io/badge/-Made%20in%20the%20EU-555?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzAwMzM5OSIvPjxwb2x5Z29uIHBvaW50cz0iMjU2LjAwLDUyLjAwIDI2My42Myw3NS40OSAyODguMzQsNzUuNDkgMjY4LjM1LDkwLjAxIDI3NS45OCwxMTMuNTEgMjU2LjAwLDk4Ljk5IDIzNi4wMiwxMTMuNTEgMjQzLjY1LDkwLjAxIDIyMy42Niw3NS40OSAyNDguMzcsNzUuNDkiIGZpbGw9IiNGRkNDMDAiLz48cG9seWdvbiBwb2ludHM9IjM0MS4wMCw3NC43OCAzNDguNjMsOTguMjcgMzczLjM0LDk4LjI3IDM1My4zNSwxMTIuNzkgMzYwLjk4LDEzNi4yOCAzNDEuMDAsMTIxLjc2IDMyMS4wMiwxMzYuMjggMzI4LjY1LDExMi43OSAzMDguNjYsOTguMjcgMzMzLjM3LDk4LjI3IiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSI0MDMuMjIsMTM3LjAwIDQxMC44NiwxNjAuNDkgNDM1LjU2LDE2MC40OSA0MTUuNTgsMTc1LjAxIDQyMy4yMSwxOTguNTEgNDAzLjIyLDE4My45OSAzODMuMjQsMTk4LjUxIDM5MC44NywxNzUuMDEgMzcwLjg5LDE2MC40OSAzOTUuNTksMTYwLjQ5IiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSI0MjYuMDAsMjIyLjAwIDQzMy42MywyNDUuNDkgNDU4LjM0LDI0NS40OSA0MzguMzUsMjYwLjAxIDQ0NS45OCwyODMuNTEgNDI2LjAwLDI2OC45OSA0MDYuMDIsMjgzLjUxIDQxMy42NSwyNjAuMDEgMzkzLjY2LDI0NS40OSA0MTguMzcsMjQ1LjQ5IiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSI0MDMuMjIsMzA3LjAwIDQxMC44NiwzMzAuNDkgNDM1LjU2LDMzMC40OSA0MTUuNTgsMzQ1LjAxIDQyMy4yMSwzNjguNTEgNDAzLjIyLDM1My45OSAzODMuMjQsMzY4LjUxIDM5MC44NywzNDUuMDEgMzcwLjg5LDMzMC40OSAzOTUuNTksMzMwLjQ5IiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSIzNDEuMDAsMzY5LjIyIDM0OC42MywzOTIuNzIgMzczLjM0LDM5Mi43MiAzNTMuMzUsNDA3LjI0IDM2MC45OCw0MzAuNzMgMzQxLjAwLDQxNi4yMSAzMjEuMDIsNDMwLjczIDMyOC42NSw0MDcuMjQgMzA4LjY2LDM5Mi43MiAzMzMuMzcsMzkyLjcyIiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSIyNTYuMDAsMzkyLjAwIDI2My42Myw0MTUuNDkgMjg4LjM0LDQxNS40OSAyNjguMzUsNDMwLjAxIDI3NS45OCw0NTMuNTEgMjU2LjAwLDQzOC45OSAyMzYuMDIsNDUzLjUxIDI0My42NSw0MzAuMDEgMjIzLjY2LDQxNS40OSAyNDguMzcsNDE1LjQ5IiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSIxNzEuMDAsMzY5LjIyIDE3OC42MywzOTIuNzIgMjAzLjM0LDM5Mi43MiAxODMuMzUsNDA3LjI0IDE5MC45OCw0MzAuNzMgMTcxLjAwLDQxNi4yMSAxNTEuMDIsNDMwLjczIDE1OC42NSw0MDcuMjQgMTM4LjY2LDM5Mi43MiAxNjMuMzcsMzkyLjcyIiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSIxMDguNzgsMzA3LjAwIDExNi40MSwzMzAuNDkgMTQxLjExLDMzMC40OSAxMjEuMTMsMzQ1LjAxIDEyOC43NiwzNjguNTEgMTA4Ljc4LDM1My45OSA4OC43OSwzNjguNTEgOTYuNDIsMzQ1LjAxIDc2LjQ0LDMzMC40OSAxMDEuMTQsMzMwLjQ5IiBmaWxsPSIjRkZDQzAwIi8%2BPHBvbHlnb24gcG9pbnRzPSI4Ni4wMCwyMjIuMDAgOTMuNjMsMjQ1LjQ5IDExOC4zNCwyNDUuNDkgOTguMzUsMjYwLjAxIDEwNS45OCwyODMuNTEgODYuMDAsMjY4Ljk5IDY2LjAyLDI4My41MSA3My42NSwyNjAuMDEgNTMuNjYsMjQ1LjQ5IDc4LjM3LDI0NS40OSIgZmlsbD0iI0ZGQ0MwMCIvPjxwb2x5Z29uIHBvaW50cz0iMTA4Ljc4LDEzNy4wMCAxMTYuNDEsMTYwLjQ5IDE0MS4xMSwxNjAuNDkgMTIxLjEzLDE3NS4wMSAxMjguNzYsMTk4LjUxIDEwOC43OCwxODMuOTkgODguNzksMTk4LjUxIDk2LjQyLDE3NS4wMSA3Ni40NCwxNjAuNDkgMTAxLjE0LDE2MC40OSIgZmlsbD0iI0ZGQ0MwMCIvPjxwb2x5Z29uIHBvaW50cz0iMTcxLjAwLDc0Ljc4IDE3OC42Myw5OC4yNyAyMDMuMzQsOTguMjcgMTgzLjM1LDExMi43OSAxOTAuOTgsMTM2LjI4IDE3MS4wMCwxMjEuNzYgMTUxLjAyLDEzNi4yOCAxNTguNjUsMTEyLjc5IDEzOC42Niw5OC4yNyAxNjMuMzcsOTguMjciIGZpbGw9IiNGRkNDMDAiLz48L3N2Zz4%3D&labelColor=003399)](https://github.com/ideaconnect/made-in-the-eu)
 [![CI](https://github.com/ideaconnect/vscode-umbra-oled/actions/workflows/ci.yml/badge.svg)](https://github.com/ideaconnect/vscode-umbra-oled/actions/workflows/ci.yml)
 [![License: EUPL-1.2](https://img.shields.io/badge/license-EUPL--1.2-003399.svg)](LICENSE)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ideaconnect?style=flat&logo=github)](https://github.com/sponsors/ideaconnect)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/idct)
 
 A true-black theme for Visual Studio Code, built for OLED screens and long sessions.
 The pixels around your code stay off, and the code itself is in soft, warm colors
@@ -170,3 +172,29 @@ Licensed under the [European Union Public Licence v. 1.2](LICENSE) (EUPL-1.2), o
 any later version approved by the European Commission. You may not use this work
 except in compliance with the Licence. The official text in all EU languages is at
 <https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12>.
+
+---
+
+<div align="center">
+
+### Free software runs on coffee ☕
+
+Umbra OLED is free and open source. If it makes your screen easier on the eyes,
+you can help keep it going.
+
+<table>
+<tr>
+<td align="center" width="50%">
+<a href="https://buymeacoffee.com/idct"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy me a coffee" height="32"></a>
+<br>
+<sub>☕ <b>One-off.</b> Buy a coffee whenever the theme saves your eyes.</sub>
+</td>
+<td align="center" width="50%">
+<a href="https://github.com/sponsors/ideaconnect"><img src="https://img.shields.io/badge/GitHub%20Sponsors-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="Sponsor on GitHub" height="32"></a>
+<br>
+<sub>💖 <b>Monthly.</b> Support ongoing work through GitHub Sponsors.</sub>
+</td>
+</tr>
+</table>
+
+</div>

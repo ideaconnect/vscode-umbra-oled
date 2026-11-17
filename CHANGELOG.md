@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.3
+
+- README: GitHub Sponsors and Buy Me a Coffee badges, and a "Free software runs
+  on coffee" support bar at the end.
+- Added `.github/FUNDING.yml`, so GitHub shows a **Sponsor** button on the repository.
+- VS Code shows a **Sponsor** button on the extension page (`sponsor` in `package.json`).
+
 ## 0.1.2
 
 - Published on the Visual Studio Marketplace as `IDCTpl.umbra-oled-theme`.
