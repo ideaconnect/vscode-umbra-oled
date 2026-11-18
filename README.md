@@ -16,11 +16,11 @@ that don't glare.
 
 ## Screenshots
 
-These screenshots show this repository open in Umbra OLED.
+These screenshots show this repository open in Umbra OLED 0.2.0.
 
-**Source Control and diff view.** The changes for this release, before they were committed:
+**Source Control and diff view.** The 0.2.0 changes, before they were committed:
 
-![Umbra OLED: the diff editor showing added lines in README.md](screenshots/diff.png)
+![Umbra OLED: the diff editor showing the 0.2.0 changes to README.md, including the new body text color](screenshots/diff.png)
 
 **Theme picker.** **Preferences: Color Theme** opened over the CI workflow:
 
