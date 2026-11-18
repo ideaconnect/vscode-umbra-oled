@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- README: the screenshots are retaken with 0.2.0, so they show the brighter body
+  text, and their captions name the version.
+
+The theme colors are unchanged.
+
 ## 0.2.0
 
 - Body text is a little brighter: `#d2cbbd` instead of `#c7c0b3`, in the editor,
