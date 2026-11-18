@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0
+
+- Body text is a little brighter: `#d2cbbd` instead of `#c7c0b3`, in the editor,
+  terminal and workbench. WCAG 2 rated the old color 11.6:1, but APCA, which judges
+  light text on black more accurately, put it at Lc 69, below the Lc 75 it sets
+  for body text. The new color is Lc 75.4 and 13.0:1, still well below white.
+- The validator checks body text against APCA Lc 75.
+- README: the palette table lists APCA values, and the Text contrast is corrected
+  (the old color was 11.6:1, not 11.3:1).
+
 ## 0.1.3
 
 - README: GitHub Sponsors and Buy Me a Coffee badges, and a "Free software runs

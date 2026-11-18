@@ -34,29 +34,32 @@ Each rule below is a hard limit, and [CI](#validation) fails the build if the th
   terminal, title bar and status bar are all `#000000`, so those pixels are off.
   Panels are separated by thin near-black borders instead of gray fills.
 - **No glare.** No opaque color in the theme is brighter than 15:1 against black.
-  Pure white is 21:1. Body text is a warm off-white, `#c7c0b3`, at about 11:1. That
-  is above WCAG AAA (7:1), without the halo white text gets on a black screen.
+  Pure white is 21:1. Body text is a warm off-white, `#d2cbbd`, at 13:1, with less
+  of the halo that white text gets on a black screen.
+- **Readable body text.** WCAG 2 contrast ratios overrate light text on black, so
+  body text must also reach APCA Lc 75, the minimum APCA sets for body text. That is
+  enough for all-day reading.
 - **Readable syntax.** Every syntax color is at least 4.5:1 (WCAG AA). The palette
-  is muted, warm pastels with little blue light.
+  is muted, warm pastels.
 - **Gentle on burn-in.** Static chrome (status bar, activity bar, title bar, the
   remote/WSL badge) uses dim foregrounds and no colored background strips.
 
 ## Palette
 
-| Role                   | Color     | Contrast on black |
-| ---------------------- | --------- | ----------------- |
-| Background             | `#000000` | n/a               |
-| Text                   | `#c7c0b3` | 11.3:1            |
-| Comments               | `#7d776d` | 4.7:1             |
-| Keywords               | `#b69cc6` | 8.6:1             |
-| Functions              | `#8fa7c6` | 8.5:1             |
-| Types / classes        | `#d4bc82` | 11.3:1            |
-| Strings                | `#a5ba88` | 10.0:1            |
-| Numbers / constants    | `#d9a06e` | 9.2:1             |
-| Properties / builtins  | `#88b5aa` | 9.2:1             |
-| Parameters             | `#cdb99a` | 11.0:1            |
-| Tags / `this` / errors | `#d68a80` | 7.8:1             |
-| Accent                 | `#8a6c43` | n/a               |
+| Role                   | Color     | Contrast on black | APCA Lc |
+| ---------------------- | --------- | ----------------- | ------- |
+| Background             | `#000000` | n/a               | n/a     |
+| Text                   | `#d2cbbd` | 13.0:1            | 75.4    |
+| Comments               | `#7d776d` | 4.7:1             | 30.9    |
+| Keywords               | `#b69cc6` | 8.6:1             | 53.8    |
+| Functions              | `#8fa7c6` | 8.5:1             | 53.5    |
+| Types / classes        | `#d4bc82` | 11.3:1            | 67.6    |
+| Strings                | `#a5ba88` | 10.0:1            | 61.1    |
+| Numbers / constants    | `#d9a06e` | 9.2:1             | 57.2    |
+| Properties / builtins  | `#88b5aa` | 9.2:1             | 57.3    |
+| Parameters             | `#cdb99a` | 11.0:1            | 66.1    |
+| Tags / `this` / errors | `#d68a80` | 7.8:1             | 49.8    |
+| Accent                 | `#8a6c43` | n/a               | n/a     |
 
 ## Install
 
@@ -132,7 +135,8 @@ code --install-extension IDCTpl.umbra-oled-theme --profile "My Profile"
    and valid semantic token selectors.
 3. **Color IDs:** every key in `colors` is a real VS Code color. This step needs a
    VS Code install.
-4. **Design rules:** the OLED, glare and readability limits above.
+4. **Design rules:** the OLED, glare and readability limits above, including the
+   APCA check for body text.
 
 ```sh
 npm run validate

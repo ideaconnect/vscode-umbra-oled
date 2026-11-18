@@ -10,7 +10,8 @@
 //   3. Color IDs: every key in "colors" exists in VS Code. Needs --vscode-app (or
 //      VSCODE_APP_DIR) pointing at a VS Code "resources/app" directory; skipped otherwise.
 //   4. Design rules: OLED surfaces are pure black, nothing glares, all syntax
-//      text stays readable.
+//      text stays readable, and body text passes APCA (which judges light text
+//      on black more accurately than WCAG 2 contrast ratios).
 
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -41,7 +42,11 @@ const OLED_SURFACES = [
 ];
 const MAX_CONTRAST = 15; // no opaque color brighter than this vs black (pure white is 21)
 const MIN_TEXT_CONTRAST = 4.5; // WCAG AA for every syntax color
-const EDITOR_FG_RANGE = [7, 13]; // body text: at least AAA, but well below white-on-black
+const EDITOR_FG_RANGE = [7, 13.5]; // body text: at least AAA, but well below white-on-black
+// Body text must also reach APCA Lc 75, APCA's minimum for body text
+// (https://git.apcacontrast.com/documentation/APCA_in_a_Nutshell).
+const MIN_BODY_LC = 75;
+const BODY_TEXT = ['foreground', 'editor.foreground', 'terminal.foreground'];
 
 // ---- reporting -------------------------------------------------------------
 
@@ -161,6 +166,19 @@ function luminance(hex) {
 function contrast(a, b) {
   const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
   return (hi + 0.05) / (lo + 0.05);
+}
+
+// APCA 0.0.98G-4g lightness contrast, as |Lc| (polarity does not matter here).
+function apca(text, bg) {
+  const y = (hex) => {
+    const { r, g, b } = rgba(hex);
+    const v = 0.2126729 * (r / 255) ** 2.4 + 0.7151522 * (g / 255) ** 2.4 + 0.072175 * (b / 255) ** 2.4;
+    return v > 0.022 ? v : v + (0.022 - v) ** 1.414;
+  };
+  const [yt, yb] = [y(text), y(bg)];
+  if (Math.abs(yb - yt) < 0.0005) return 0;
+  const s = yb > yt ? (yb ** 0.56 - yt ** 0.57) * 1.14 : (yb ** 0.65 - yt ** 0.62) * 1.14;
+  return Math.abs(s) < 0.1 ? 0 : (Math.abs(s) - 0.027) * 100;
 }
 
 const isOpaque = (hex) => rgba(hex).a === 255;
@@ -388,6 +406,12 @@ function checkDesign(where, colors, textColors) {
   const body = contrast(fg, bg);
   if (body < EDITOR_FG_RANGE[0] || body > EDITOR_FG_RANGE[1]) {
     error(where, `editor.foreground is ${body.toFixed(2)}:1, must be between ${EDITOR_FG_RANGE[0]} and ${EDITOR_FG_RANGE[1]}`);
+  }
+  for (const key of BODY_TEXT) {
+    const value = colors[key];
+    if (value === undefined || !HEX.test(value) || !isOpaque(value)) continue;
+    const lc = apca(value, bg);
+    if (lc < MIN_BODY_LC) error(where, `readability: colors["${key}"] ${value} is APCA Lc ${lc.toFixed(1)} on ${bg}, needs at least Lc ${MIN_BODY_LC}`);
   }
   for (const [at, value] of textColors) {
     if (!isOpaque(value)) continue;
